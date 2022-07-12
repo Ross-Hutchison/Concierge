@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Users\\ross-\\Documents\\Redgate\\C# practice\\Concierge\\Concierge\\Concierge.csproj": {}
+  },
+  "projects": {
+    "D:\\Users\\ross-\\Documents\\Redgate\\C# practice\\Concierge\\Concierge\\Concierge.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Users\\ross-\\Documents\\Redgate\\C# practice\\Concierge\\Concierge\\Concierge.csproj",
+        "projectName": "Concierge",
+        "projectPath": "D:\\Users\\ross-\\Documents\\Redgate\\C# practice\\Concierge\\Concierge\\Concierge.csproj",
+        "packagesPath": "C:\\Users\\ross-\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\ross-\\Documents\\Redgate\\C# practice\\Concierge\\Concierge\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ross-\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

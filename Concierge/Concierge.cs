@@ -6,4 +6,9 @@ namespace Staff {
     class MrDeeds {
 
     } 
+
+    class Selector {
+
+    }
+
 } 

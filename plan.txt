@@ -28,3 +28,39 @@ So we have in this class four main tasks
     A selector class can have selector methods that use the ticket information to acquire some number of recipies
 
     This is basically the control layer of the project that does the brunt of the work
+
+---------- Info Namespace ----------
+Here we have only three main tasks 
+Store recipie information
+Store collections of related recipies based on some criteria 
+Provide access to collections and individual recipie information in the form of an API.
+
+what should a basic recipie hold
+
+1. name
+2. ingredients 
+3. method
+
+All of these are strings, the ingredients could be an array of strings but likely not required, can consider if it becomes handy later 
+
+so a Recipie book is a collection of recipies that fit some criteria, for now we can leave the criteria blank and just use one 
+but in the future to prevent having to re-create them when something changes they should have a condition that is unlikely to change
+such as a different book for breakfasts, lunches, and dinners.
+
+added in a way to create new recipie objects, and store them as strings, which will help with making the recipie books.
+We'll need some way of storing them in a file and reading them from a file,
+can use an ASCII control char to separate recipies, and another to separate parts within a recipie
+
+we want to store recipies as a file per book? Or maybe multiple files per book depending on how many we have. 
+This can change as we add more things to sort by, for now we'll do a file per book.
+
+The book contains a name, a type specifier, a recipie list, and a filepath.
+The name is the name of the book for ease of display, 
+the specifier is what type of recipies it holds (currently blank)
+the list holds the recipie objects it loads when needed 
+the filepath is the path to the file that stores its data in hard memory 
+
+should we use a DB instead? With a DB it's easier to do searches, each recipe book could be its own table
+and then we don't need to worry so much about keeping fies correct. Yeh we'll try an SQL-Server DB 
+
+

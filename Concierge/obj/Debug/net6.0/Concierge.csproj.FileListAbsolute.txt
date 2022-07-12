@@ -1,0 +1,15 @@
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\bin\Debug\net6.0\Concierge.exe
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\bin\Debug\net6.0\Concierge.deps.json
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\bin\Debug\net6.0\Concierge.runtimeconfig.json
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\bin\Debug\net6.0\Concierge.dll
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\bin\Debug\net6.0\Concierge.pdb
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.csproj.AssemblyReference.cache
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.AssemblyInfoInputs.cache
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.AssemblyInfo.cs
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.csproj.CoreCompileInputs.cache
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.dll
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\refint\Concierge.dll
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.pdb
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\Concierge.genruntimeconfig.cache
+D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge\obj\Debug\net6.0\ref\Concierge.dll
