@@ -12,7 +12,19 @@ Using specific collections of set types will allow for easier searching, we fina
 requirements and make a search through the others
 
 Let's say two namespaces, Staff and information namespaces 
-The concierge namespace contains the criteria specification class and the functionality for using it to make specific requests
+The Staff namespace contains the criteria specification class and the functionality for using it to make specific requests
 The information namespace contains the recipie and recipie collection classes as well as the functions for retrieving 
 information from them
 
+---------- Staff Namespace ----------
+So we have in this class four main tasks
+    1. get the selection criteria
+    2. store the selection criteria
+    3. make the selection of appropriate recipies 
+    4. select and output some number of these appropriate recipies 
+
+    MrDeeds the concierge class can handle the user interaction
+    A ticket class can store the requirements 
+    A selector class can have selector methods that use the ticket information to acquire some number of recipies
+
+    This is basically the control layer of the project that does the brunt of the work
