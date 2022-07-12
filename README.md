@@ -9,5 +9,7 @@ Add field: add flavours (sweet, sour, spicy, savoury, cheesy, ...)
 Add feature: choose between restaurants and cooking\
 Add field: add main ingredients (cheese, fish, carrot, beef, ...)\
 Add modifiers: (vegan, vegetarian, spicy, ...)\
+Add ability to store profiles, allowing for certain recipies to be blacklisted or alergies etc. to be stored
 # Useful
 http://csharp.net-informations.com/gui/gui_tutorial.htm
+https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/

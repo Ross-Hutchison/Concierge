@@ -1,0 +1,18 @@
+So I want to have the main selector class, as well as a class that handles the storing of recipies I can then make requests using
+the main object that make use of these recipies for information. What are our goals as this will determine class structure
+
+1. Store numerous recipies, likely in text files that we can then read from to load up information. 
+2. allow for sorting of receipies based on factors like key ingredients, cooking time etc. 
+3. allow for the inclusion of new recipies into the system 
+4. Separate food items into breakfasts, lunches, and dinners 
+5. Allow for some form of random, or curated selction of foods, as well as specific requesting of them
+
+So we need a class for recipies, that will hold their information, and we likely want some form of recipie collection?
+Using specific collections of set types will allow for easier searching, we finally want a main class that will take in the search 
+requirements and make a search through the others
+
+Let's say two namespaces, Staff and information namespaces 
+The concierge namespace contains the criteria specification class and the functionality for using it to make specific requests
+The information namespace contains the recipie and recipie collection classes as well as the functions for retrieving 
+information from them
+

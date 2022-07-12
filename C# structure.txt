@@ -1,0 +1,24 @@
+key:
+<> demarcates a proper noun
+[] demarcates a keyword 
+
+So a project is made of multiple diles and directories as ususal, but each file contains one or more <namespaces>
+
+a namespace is a collection of data that houses classes, structs, interfaces etc. They are used to organise classes, such as 
+the System namespace containing classes like the console, hence System.Console. Namespaces can be imported into a file with the 
+[using] keyword. All namespaces have public access, and they act as a scope delimiter, so assumedly classes in one namespace cannot 
+have an identical name, but classes in two different namespaces CAN have the same name, as they would be accessed differently 
+Namespace1.Class vs Namespace2.Class. Namespaces are declared using [namespace]
+
+The following are some of the standard namespaces in .NET framework.
+
+System: Contain classes that implement basic functionalities like mathematical operations, data conversions etc.
+System.IO: Contains classes used for file I/O operations.
+System.Net: Contains class wrappers around underlying network protocols.
+System.Collections: Contains classes that implement collections of objects such as lists, hashtable etc.
+System.Data: Contains classes that make up ADO.NET data access architecture.
+System,Drawing: Contains classes that implement GUI functionalities.
+System.Threading: Contains classes that are used for multithreading programming.
+System.Web: Classes that implement HTTP protocol to access web pages.
+System.Xml: Classes that are used for processing XML data.
+
