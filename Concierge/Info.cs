@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Control;
 
 namespace Information{
 
@@ -7,6 +8,12 @@ namespace Information{
             private String name;
             private String ingredients;
             private string steps;
+
+
+            public static char GroupSeparator = (char)29;     //character that separates sections within a recipie
+            public static char recordSeparator = (char)30;    //character that separates two recipies
+            public static char UnitSeparator = (char)31;      //character that separates parts of each section in a recipie
+
 
             public Recipie() {
                 this.name = "";
@@ -34,7 +41,8 @@ namespace Information{
                 string ing = "";
                 int ingNum = 1;
                 while ( (inpt = System.Console.ReadLine()) != "0") {
-                    ing += (ingNum + ". " + inpt + "\n");
+                    if(ingNum != 1) ing += ("\n" + ingNum + ". " + inpt);
+                    else ing += (ingNum + ". " + inpt);
                     ingNum++;
                 }
                 r.ingredients = ing;
@@ -43,12 +51,21 @@ namespace Information{
                 string steps = "";
                 int stepNum = 1;
                 while ( (inpt = System.Console.ReadLine()) != "0") {
-                    steps += (stepNum + ". " + inpt + "\n");
+                    if(stepNum != 1) steps += ("\n" + stepNum + ". " + inpt);
+                    else steps += (stepNum + ". " + inpt);
                     stepNum++;
                 }
                 r.steps = steps;
 
                 return r;
+            }
+
+            public string ToDatabaseEntry() {
+                string retVal = "";
+                retVal += (this.name + GroupSeparator);
+                retVal += (this.ingredients.Replace('\n', UnitSeparator) + GroupSeparator);
+                retVal += (this.steps.Replace('\n', UnitSeparator));
+                return retVal;
             }
 
             //Function to convert a recipie to a String version
@@ -60,15 +77,11 @@ namespace Information{
                 retVal += straightLine;
                 retVal += "\n|     " + this.name + "     |\n";
                 retVal += (straightLine + "\n");
-                retVal += ingredients;
+                retVal += this.ingredients;
                 retVal += (straightLine + "\n");
-                retVal += steps;
+                retVal += this.steps;
 
                 return retVal;
             }
-    }
-
-    class RecipieBook {
-
     }
 }

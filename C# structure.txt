@@ -22,3 +22,5 @@ System.Threading: Contains classes that are used for multithreading programming.
 System.Web: Classes that implement HTTP protocol to access web pages.
 System.Xml: Classes that are used for processing XML data.
 
+to compile and run (at time of writing this) use command
+    $ csc .\Concierge.cs .\Config.cs .\Info.cs .\Program.cs; .\Program.exe     

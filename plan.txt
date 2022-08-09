@@ -63,4 +63,51 @@ the filepath is the path to the file that stores its data in hard memory
 should we use a DB instead? With a DB it's easier to do searches, each recipe book could be its own table
 and then we don't need to worry so much about keeping fies correct. Yeh we'll try an SQL-Server DB 
 
+---------- Creating DB Functionality ----------
+So SQL Server is downloaded, now need to set up some form of config file
 
+okay so the connection is set up 
+following this tutorial 
+https://www.guru99.com/c-sharp-access-database.html#:~:text=C%23%20can%20execute%20'SQL'%20select,insert%20records%20into%20the%20database.
+
+will need to make a database for this 
+okay database made and connected to
+will need to use ASCII control char to represent newlines as SQL-Server doesn't care about \n 
+Then when we are writing to the database we replace \n with this control char 
+and when we are reading we replace that control char with \n.
+
+
+okay issue
+
+Database needs to know what a recipie is, so needs to be using Info namespace
+If we want AddRecipie to insert into database it needs to be able to call database stuff, needs to be using Control namespace 
+
+this IS legal since C# allows circular namespaces apparently, but I would really like to avoid it, so instead 
+I'll make an AddRecipie call in control? 
+
+let's redefine the structure
+
+Main control of program is the program class, it handles UI interaction through console (and later UI) 
+Instructions through program will modify database content
+We want to store modifications in different places 
+    Concierge handles selection of options
+    Information handles creation and access of recipies
+Both of these need to use the database for this 
+Database cannot know about their internal classes (recipies and user requirements) without circular dependencies 
+However Database needs to be able to use the information from those in it's queries
+Could have the Concierge and the information classes do SQL conversion internally but that's a bit messy
+Could have the database class call their methods, but this changes the functionality of the DB class 
+
+Instead of config, it would be control, and it would act as a collection of the main functions,
+AddRecipie
+RemoveRecipie
+SelectRecipie (via criteria)
+
+We have group, unit and record separators, leave toString alone and make a 
+Record.toDatabaseEntry() function
+
+YAAAAAY
+
+can insert directly into DB now
+
+next up, unsure 
