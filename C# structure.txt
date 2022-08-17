@@ -23,4 +23,4 @@ System.Web: Classes that implement HTTP protocol to access web pages.
 System.Xml: Classes that are used for processing XML data.
 
 to compile and run (at time of writing this) use command
-    $ csc .\Concierge.cs .\Config.cs .\Info.cs .\Program.cs; .\Program.exe     
+    $ csc .\Concierge.cs .\Control.cs .\Info.cs .\Program.cs; .\Program.exe     

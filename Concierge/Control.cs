@@ -55,13 +55,33 @@ namespace Control
         public static void addNewRecipie() {
             Recipie r = Recipie.AddRecipie();
             string[] r_db = r.ToDatabaseEntry().Split(Recipie.GroupSeparator); 
+
+            if(r_db.Length < 4) {
+                System.Console.WriteLine("ERROR: Malformed Database Entry in addNewRecipie handler\n");
+                return;
+            }
+
             String insertStr = "INSERT INTO test (name,ingredients,steps) VALUES('" + r_db[0] + "','" + r_db[1] + "','" + r_db[2] + "')";
-            System.Console.WriteLine(insertStr);
+            System.Console.WriteLine(insertStr); //DEBUG
             SqlCommand command = new SqlCommand(insertStr, DatabaseControl.connection); 
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.InsertCommand = new SqlCommand(insertStr, DatabaseControl.connection);
             adapter.InsertCommand.ExecuteNonQuery();
             command.Dispose();
+
+            String tagsInsertString = "INSERT INTO test_tags (name, tag) VALUES";
+
+            string[] tags = r_db[3].Split(',');
+            for(int i = 0; i < tags.Length; i++) {
+                if(i > 0) tagsInsertString += ",";
+                tagsInsertString += "('" + r_db[0] + "','" + tags[i] + "')";
+            }
+
+            System.Console.WriteLine(tagsInsertString); //DEBUG
+            SqlCommand tagsCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection); 
+            SqlDataAdapter tagsAdapter = new SqlDataAdapter();
+            tagsAdapter.InsertCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection);
+            tagsAdapter.InsertCommand.ExecuteNonQuery();
         }
     }
 

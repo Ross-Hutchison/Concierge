@@ -7,7 +7,12 @@ namespace Information{
     class Recipie {
             private String name;
             private String ingredients;
-            private string steps;
+            private String steps;
+            // private String time;    // breakfast, lunch, dinner, desert, snack
+            // private String flavours; // sweet, savoury, cheesy, sour, refreshing, spicy etc.
+            // private String diet; // vegitarian, vegan, omnivore
+            // private String origin; //chinese, italian, french, mexican, etc.  
+            private String tags; // Consolidation of all above into single unordered list taken from DB.
 
 
             public static char GroupSeparator = (char)29;     //character that separates sections within a recipie
@@ -19,16 +24,20 @@ namespace Information{
                 this.name = "";
                 this.ingredients = "";
                 this.steps = "";
+                this.tags = "";
             }
 
             public string GetName() {return this.name;}
             public string GetIngredients() {return this.ingredients;}
             public string GetSteps() {return this.steps;}
 
+            public string GetTags() {return this.tags;}
+
             public void SetName(string name) {this.name = name;}
             public void SetIngredients(string ing) {this.ingredients = ing;}
             public void SetSteps(string steps) {this.steps = steps;}
 
+            public void SetTags(string tags) {this.tags = tags;}
 
             public static Recipie AddRecipie() {
                 Recipie r = new Recipie();
@@ -57,6 +66,14 @@ namespace Information{
                 }
                 r.steps = steps;
 
+                System.Console.WriteLine("----------\nEnter a comma separated list of single word recipie tags such as lunch,spicy,italian\n----------");
+                inpt = null;
+                do {inpt = System.Console.ReadLine();}
+                while( inpt == null || inpt.Length < 3);
+                inpt = inpt.Remove(0, ' ').ToLower();   //remove any spaces from the data and make lower case
+                
+                // r.tags = "testVal,testVal2,testVal3";
+
                 return r;
             }
 
@@ -64,7 +81,8 @@ namespace Information{
                 string retVal = "";
                 retVal += (this.name + GroupSeparator);
                 retVal += (this.ingredients.Replace('\n', UnitSeparator) + GroupSeparator);
-                retVal += (this.steps.Replace('\n', UnitSeparator));
+                retVal += (this.steps.Replace('\n', UnitSeparator) + GroupSeparator);
+                retVal += (this.tags);
                 return retVal;
             }
 
@@ -80,6 +98,8 @@ namespace Information{
                 retVal += this.ingredients;
                 retVal += (straightLine + "\n");
                 retVal += this.steps;
+                retVal += (straightLine + "\n");
+                retVal += this.tags;
 
                 return retVal;
             }

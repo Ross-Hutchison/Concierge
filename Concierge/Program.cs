@@ -1,4 +1,4 @@
-﻿using Control;
+using Control;
 
 namespace AppMain {
     class program {
