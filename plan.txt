@@ -110,4 +110,7 @@ YAAAAAY
 
 can insert directly into DB now
 
-next up, unsure 
+next up we want to handle recipie books, but first we need to set up more parts of recipies 
+so that we have a better idea what each recipie book should hold, i.e. what to we divide recipies by
+
+
