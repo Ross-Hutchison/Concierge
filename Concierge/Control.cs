@@ -91,7 +91,7 @@ namespace Control
                 string[] tags = r_db[3].Split(Recipie.UnitSeparator);
                 for(int i = 0; i < tags.Length; i++) {
                     if(i > 0) tagsInsertString += ",";
-                    tagsInsertString += "('" + r_db[0] + "','" + tags[0] + "')";
+                    tagsInsertString += "('" + r_db[0] + "','" + tags[i] + "')";
                 }
 
                 System.Console.WriteLine(tagsInsertString); //DEBUG
