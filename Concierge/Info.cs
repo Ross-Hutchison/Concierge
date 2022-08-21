@@ -12,11 +12,11 @@ namespace Information{
             // private String flavours; // sweet, savoury, cheesy, sour, refreshing, spicy etc.
             // private String diet; // vegitarian, vegan, omnivore
             // private String origin; //chinese, italian, french, mexican, etc.  
-            private String tags; // Consolidation of all above into single unordered list taken from DB.
+            private HashSet<String> tags; // Consolidation of all above into single unordered list of distinct values
 
 
             public static char GroupSeparator = (char)29;     //character that separates sections within a recipie
-            public static char recordSeparator = (char)30;    //character that separates two recipies
+            public static char RecordSeparator = (char)30;    //character that separates two recipies
             public static char UnitSeparator = (char)31;      //character that separates parts of each section in a recipie
 
 
@@ -24,55 +24,80 @@ namespace Information{
                 this.name = "";
                 this.ingredients = "";
                 this.steps = "";
-                this.tags = "";
+                this.tags = new HashSet<string>();
             }
 
             public string GetName() {return this.name;}
             public string GetIngredients() {return this.ingredients;}
             public string GetSteps() {return this.steps;}
 
-            public string GetTags() {return this.tags;}
+            public HashSet<String> GetTags() {return this.tags;}
 
             public void SetName(string name) {this.name = name;}
             public void SetIngredients(string ing) {this.ingredients = ing;}
             public void SetSteps(string steps) {this.steps = steps;}
 
-            public void SetTags(string tags) {this.tags = tags;}
+            public void setTags(string tags) {
+                this.tags = new HashSet<string>();
+                string[] parts = tags.Split(',');
+                for(int i = 0; i < parts.Length; i++) {
+                    this.tags.Add(parts[i]);
+                }
+            }
 
             public static Recipie AddRecipie() {
                 Recipie r = new Recipie();
                 var inpt = "";
                 System.Console.WriteLine("----------\nPlease enter the recipe's name\n----------");
-                inpt = System.Console.ReadLine();
+                
+                while((inpt = System.Console.ReadLine()) == null || inpt.Length < 2) {
+                    System.Console.WriteLine("----------\nInvalid name, please enter at least two characters\n----------");
+                }
                 r.name = inpt;
 
                 System.Console.WriteLine("----------\nEnter Recipe Ingredients one at a time, to move on to the method enter 0\n----------");
                 string ing = "";
                 int ingNum = 1;
                 while ( (inpt = System.Console.ReadLine()) != "0") {
-                    if(ingNum != 1) ing += ("\n" + ingNum + ". " + inpt);
-                    else ing += (ingNum + ". " + inpt);
-                    ingNum++;
+                    if(inpt == null || inpt.Length < 2) {
+                        System.Console.WriteLine("Invalid Ingredient Name, Minimum length of two characters\n");
+                        continue;
+                    }
+                    else {
+                        if(ingNum != 1) ing += ("\n" + ingNum + ". " + inpt);
+                        else ing += (ingNum + ". " + inpt);
+                        ingNum++;
+                    }
                 }
                 r.ingredients = ing;
+
 
                 System.Console.WriteLine("----------\nEnter Recipe Step by Step, to complete the recipie enter 0\n----------");
                 string steps = "";
                 int stepNum = 1;
-                while ( (inpt = System.Console.ReadLine()) != "0") {
+                while ( (inpt = System.Console.ReadLine()) != "0" ) {
+                    if(inpt == null || inpt.Length < 4) {
+                        Console.WriteLine("Invalid step: Minimum length of four characters\n");
+                        continue;
+                    }
                     if(stepNum != 1) steps += ("\n" + stepNum + ". " + inpt);
                     else steps += (stepNum + ". " + inpt);
                     stepNum++;
                 }
                 r.steps = steps;
 
-                System.Console.WriteLine("----------\nEnter a comma separated list of single word recipie tags such as lunch,spicy,italian\n----------");
-                inpt = null;
-                do {inpt = System.Console.ReadLine();}
-                while( inpt == null || inpt.Length < 3);
-                inpt = inpt.Remove(0, ' ').ToLower();   //remove any spaces from the data and make lower case
-                
-                // r.tags = "testVal,testVal2,testVal3";
+
+                System.Console.WriteLine("----------\nEnter tags (such as lunch, spicy, italian etc.) one after the other, to finalise the recipie enter 0\n----------");
+                inpt = System.Console.ReadLine();
+                while (inpt != "0") {
+                    if(inpt == null || inpt.Length < 3) {
+                        Console.WriteLine("Invalid tag: Minimum length of a tag is three characters\n");
+                        inpt = Console.ReadLine();
+                        continue;
+                    }
+                    r.tags.Add(inpt.ToLower());
+                    inpt = System.Console.ReadLine();
+                }
 
                 return r;
             }
@@ -82,7 +107,15 @@ namespace Information{
                 retVal += (this.name + GroupSeparator);
                 retVal += (this.ingredients.Replace('\n', UnitSeparator) + GroupSeparator);
                 retVal += (this.steps.Replace('\n', UnitSeparator) + GroupSeparator);
-                retVal += (this.tags);
+                
+                int tagNum = 0;
+                foreach(String str in this.tags) {
+                    if(tagNum > 0) retVal += UnitSeparator;
+                    retVal += str;
+                    tagNum++;
+                }
+
+                System.Console.WriteLine("Converting Recipie to Database Entry gives\n" + retVal + "\n");
                 return retVal;
             }
 

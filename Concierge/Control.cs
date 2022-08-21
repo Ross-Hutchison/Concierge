@@ -71,7 +71,7 @@ namespace Control
 
             String tagsInsertString = "INSERT INTO test_tags (name, tag) VALUES";
 
-            string[] tags = r_db[3].Split(',');
+            string[] tags = r_db[3].Split(Recipie.UnitSeparator);
             for(int i = 0; i < tags.Length; i++) {
                 if(i > 0) tagsInsertString += ",";
                 tagsInsertString += "('" + r_db[0] + "','" + tags[i] + "')";
