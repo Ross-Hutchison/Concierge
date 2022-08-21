@@ -177,4 +177,38 @@ tags table, this means that we need to find some way of removing duplicates,
 
 can use a set for tags, instead of a string. 
 
+okay tags work fine now, will want to set up a transaction next so that we 
+don't add in the recipie without its tags.
+
+added in transactions, to test this I replaced the counter variable when 
+adding multiple tags into the query to use 0, thereby only adding the first tag which 
+would result in duplicates causing a primary key conflict this should trigger a rollback 
+and the first insert should not be found in the database
+
+will test with a recipie for tap water
+
+oh it crashed anyway because I added a ' which fucked with the query statement,
+I can fix that when I do input sanitisation.
+
+    Converting Recipie to Database Entry gives
+    tap water↔1. drinking vessel▼2. a tap▼3. paid water bill↔1. take vessel and hold under tao▼2. turn on tap▼3. when glass is near full, turn off tap↔dude it's water▼what more can i say▼it's water
+
+    INSERT INTO test (name,ingredients,steps) VALUES('tap water','1. drinking vessel▼2. a tap▼3. paid water bill','1. take vessel and hold under tao▼2. turn on tap▼3. when glass is near full, turn off tap')
+    INSERT INTO test_tags (name, tag) VALUES('tap water','dude it's water'),('tap water','dude it's water'),('tap water','dude it's water')       
+    Exception occurred when adding new recipie: System.Data.SqlClient.SqlException: Incorrect syntax near 's'.
+    Unclosed quotation mark after the character string ')'.
+    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+    at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+    at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+    at System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async)
+    at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(DbAsyncResult result, String methodName, Boolean sendToPipe)
+    at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+    at Control.userCommandHandler.addNewRecipie()
+    bye
+
+    PS D:\Users\ross-\Documents\Redgate\C# practice\Concierge\Concierge> 
+
+The database doesn't contain tap water in test, even though that insert would be fine
+test success.
+
 

@@ -61,27 +61,70 @@ namespace Control
                 return;
             }
 
-            String insertStr = "INSERT INTO test (name,ingredients,steps) VALUES('" + r_db[0] + "','" + r_db[1] + "','" + r_db[2] + "')";
-            System.Console.WriteLine(insertStr); //DEBUG
-            SqlCommand command = new SqlCommand(insertStr, DatabaseControl.connection); 
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.InsertCommand = new SqlCommand(insertStr, DatabaseControl.connection);
-            adapter.InsertCommand.ExecuteNonQuery();
-            command.Dispose();
+            SqlTransaction transaction; //transaction top ensure both inserts occur or neither occur
+            transaction = DatabaseControl.connection.BeginTransaction();
 
+            //strings that detail the begining of the insert queriers
+            String insertStr = "INSERT INTO test (name,ingredients,steps) VALUES('" + r_db[0] + "','" + r_db[1] + "','" + r_db[2] + "')";
             String tagsInsertString = "INSERT INTO test_tags (name, tag) VALUES";
 
-            string[] tags = r_db[3].Split(Recipie.UnitSeparator);
-            for(int i = 0; i < tags.Length; i++) {
-                if(i > 0) tagsInsertString += ",";
-                tagsInsertString += "('" + r_db[0] + "','" + tags[i] + "')";
-            }
+            System.Console.WriteLine(insertStr); //DEBUG
 
-            System.Console.WriteLine(tagsInsertString); //DEBUG
-            SqlCommand tagsCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection); 
-            SqlDataAdapter tagsAdapter = new SqlDataAdapter();
-            tagsAdapter.InsertCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection);
-            tagsAdapter.InsertCommand.ExecuteNonQuery();
+            try {
+
+                //create a new SQL command for the first insert, and make it part of the transaction
+                SqlCommand command = new SqlCommand(insertStr, DatabaseControl.connection); 
+                command.Connection = DatabaseControl.connection;
+                command.Transaction = transaction;
+
+                //create a new adapter to execute the command and update the Database
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(insertStr, DatabaseControl.connection);
+                // adapter.InsertCommand.Connection = DatabaseControl.connection;
+                // adapter.InsertCommand.Transaction = transaction;
+                adapter.InsertCommand = command;
+                
+                //execute the first insert query and close objects
+                adapter.InsertCommand.ExecuteNonQuery();
+                command.Dispose();
+
+                string[] tags = r_db[3].Split(Recipie.UnitSeparator);
+                for(int i = 0; i < tags.Length; i++) {
+                    if(i > 0) tagsInsertString += ",";
+                    tagsInsertString += "('" + r_db[0] + "','" + tags[0] + "')";
+                }
+
+                System.Console.WriteLine(tagsInsertString); //DEBUG
+
+                //create new command for insertion to tags table and make part of transaction
+                SqlCommand tagsCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection); 
+                tagsCommand.Connection = DatabaseControl.connection;
+                tagsCommand.Transaction = transaction;
+
+                //create new adapter for updating the data
+                SqlDataAdapter tagsAdapter = new SqlDataAdapter();
+                tagsAdapter.InsertCommand = new SqlCommand(tagsInsertString, DatabaseControl.connection);
+                // tagsAdapter.InsertCommand.Connection = DatabaseControl.connection;
+                // tagsAdapter.InsertCommand.Transaction = transaction;
+                tagsAdapter.InsertCommand = tagsCommand;
+
+                //execute second insert query and close objects 
+                tagsAdapter.InsertCommand.ExecuteNonQuery();
+                tagsCommand.Dispose();
+
+                //commit the completed transaction
+                transaction.Commit();
+            }
+            catch (Exception e) {
+                System.Console.WriteLine("Exception occurred when adding new recipie: " + e.ToString());
+                try{
+                    transaction.Rollback();
+                }
+                catch(Exception e2) {
+                    System.Console.WriteLine("Exception occurred during Rollback of transaction: " + e2.ToString());
+                }
+                return;
+            }
         }
     }
 
